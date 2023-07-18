@@ -8,7 +8,7 @@ const player = new Player(iframe);
 
     const hendlyTimeUpdate = throttle(({seconds}) => {
         
-        localStorage.setItem("videoplayer-curent-time", currentTime);
+        localStorage.setItem("videoplayer-curent-time", seconds);
     }, 1000);
     player.on("timeupdate", hendlyTimeUpdate);
 
