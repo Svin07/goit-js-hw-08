@@ -46,7 +46,7 @@ else
 function onFormSubmit(evt) {
 
     evt.preventDefault();
-    if (refs.input.value === ""){
+    if (refs.input.value === "" || refs.textarea.value === ""){
         console.log("Будь ласка, заповніть поля!")
      }
      else{
