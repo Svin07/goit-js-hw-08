@@ -44,7 +44,7 @@ else
 function onFormSubmit(evt) {
 
     evt.preventDefault();
-    if (localData.email === "" || localData.message === ""){
+    if (refs.input === "" || refs.textarea === ""){
         console.log("Будь ласка, заповніть поля!")
      }
      console.log(formData);
