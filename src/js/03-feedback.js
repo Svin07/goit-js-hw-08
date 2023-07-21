@@ -5,6 +5,8 @@ const refs = {
     textarea: document.querySelector(".feedback-form textarea"),
    };
 
+   console.dir(refs)
+
 const form = document.querySelector(".feedback-form");
 
 form.addEventListener("input", throttle(pushFormData,500));
@@ -44,11 +46,12 @@ else
 function onFormSubmit(evt) {
 
     evt.preventDefault();
-    if (refs.input === "" || refs.textarea === ""){
+    if (refs.input.value === ""){
         console.log("Будь ласка, заповніть поля!")
      }
+     else{
      console.log(formData);
      evt.currentTarget.reset();
      localStorage.removeItem("feedback-form-state");
-     formData = {email:"", message:""};
+     formData = {email:"", message:""};}
 }
