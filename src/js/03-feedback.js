@@ -24,14 +24,22 @@ populatteTextArea();
 
 function populatteTextArea() {
 
+    if(localData === null )
+    
+    {return}
     if(localData.email && localData.message){
+        
         refs.input.value = localData.email;
     refs.textarea.value = localData.message;
     formData.email = localData.email;
     formData.message = localData.message;
       }
 else
-        {console.log("є пусті поля");}
+        {console.log("є пусті поля");
+        
+    }
+
+    
 }
 function onFormSubmit(evt) {
 
@@ -39,7 +47,7 @@ function onFormSubmit(evt) {
     if (localData.email === "" || localData.message === ""){
         console.log("Будь ласка, заповніть поля!")
      }
-     console.log(`email: ${refs.input.value}, message: ${refs.textarea.value}`);
+     console.log(formData);
      evt.currentTarget.reset();
      localStorage.removeItem("feedback-form-state");
      formData = {email:"", message:""};
