@@ -5,7 +5,7 @@ const refs = {
     textarea: document.querySelector(".feedback-form textarea"),
    };
 
-   console.dir(refs)
+ 
 
 const form = document.querySelector(".feedback-form");
 
