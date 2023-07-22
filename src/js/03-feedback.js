@@ -1,44 +1,30 @@
 import throttle from "lodash.throttle";
-
+const STORAGE_KEY = 'feedback-form-state';
 const refs = {
-    input: document.querySelector(".feedback-form input"),
-    textarea: document.querySelector(".feedback-form textarea"),
+    form: document.querySelector(".feedback-form")
    };
 
- 
+refs.form.addEventListener("input", throttle(onFormInput,500));
+refs.form.addEventListener("submit", onFormSubmit);
 
-const form = document.querySelector(".feedback-form");
+let formData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+const {email, message} = refs.form.elements;
 
-form.addEventListener("input", throttle(pushFormData,500));
-
-form.addEventListener("submit", onFormSubmit);
-
-let formData = {email:"", message:""};
-
-
-function pushFormData(event) {
+function onFormInput(event) {
     formData[event.target.name] = event.target.value;
 
-    localStorage.setItem("feedback-form-state", JSON.stringify(formData));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
-const localData = JSON.parse(localStorage.getItem("feedback-form-state"));
-populatteTextArea();
 
-function populatteTextArea() {
+populateForm();
 
-    if(localData === null )
-    
-    {return}
-    if(localData.email && localData.message){
-        
-        refs.input.value = localData.email;
-    refs.textarea.value = localData.message;
-    formData.email = localData.email;
-    formData.message = localData.message;
-      }
-else
-        {console.log("є пусті поля");
-        
+function populateForm() {
+    const localData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+    if(localData){
+     email.value = localData.email || '';
+     message.value = localData.message || '';
+     
     }
 
     
@@ -46,12 +32,12 @@ else
 function onFormSubmit(evt) {
 
     evt.preventDefault();
-    if (refs.input.value === "" || refs.textarea.value === ""){
-        console.log("Будь ласка, заповніть поля!")
+    if (email.value === "" || message.value === ""){
+        alert("Будь ласка, заповніть форму!")
      }
      else{
      console.log(formData);
      evt.currentTarget.reset();
-     localStorage.removeItem("feedback-form-state");
-     formData = {email:"", message:""};}
+     localStorage.removeItem(STORAGE_KEY);
+     formData = {};}
 }
